@@ -1,0 +1,27 @@
+## O que é um CSR?
+CSR significa Certificate Signing Request (Requisição de Assinatura
+de Certificado). É um arquivo que contéms seus dados de identificação, chave pública e uma assinatura digital gerada com sua chave privada
+
+Sua funcionalidade se da da seguinte forma. O CSR é enviado para uma Autoridade Certificadora
+como:
+- Let's Encrypt (gratuita)
+- DigiCert
+- Comodo
+
+A CA verifica se você realmente é dono do domínio/organização, e então
+assina o certificado, tornando-o confiável para navegadores e sistemas.
+
+## O que são os campos preenchidos?
+- Country Name (C)         → código do país (BR para Brasil)
+- State (ST)               → estado
+- Locality (L)             → cidade
+- Organization (O)         → nome da empresa/instituição
+- Organizational Unit (OU) → setor/departamento
+- Common Name (CN)         → domínio do site (ex: meusite.com.br)
+- Email                    → contato do responsável
+
+## Por que o CN é o campo mais importante?
+O Common Name define para qual domínio o certificado será válido.
+Se o CN for exemplo.local e for acessado outro.local o
+navegador exibirá um erro de certificado inválido, mesmo que o
+certificado seja tecnicamente correto.
