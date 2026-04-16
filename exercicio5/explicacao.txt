@@ -1,0 +1,32 @@
+## O que é um certificado X.509?
+X.509 é um padrão internacional que define o formato dos certificados
+digitais. Ele especifica quais informações o certificado deve conter
+e como elas devem ser estruturadas.
+
+## O que o comando faz?
+'openssl x509 -req -days 365 -in aluno.csr -signkey aluno.key -out aluno.crt'
+- x509       → trabalha com certificados no padrão X.509
+- -req       → indica que a entrada é um CSR
+- -days 365  → validade de 365 dias
+- -in        → arquivo CSR de entrada
+- -signkey   → chave privada usada para assinar
+- -out       → arquivo de certificado gerado
+
+## O que contém o certificado gerado?
+- Versão do padrão X.509
+- Número de série
+- Algoritmo de assinatura usado (ex: SHA256withRSA)
+- Emissor (quem assinou — no caso, nós mesmos)
+- Período de validade (início e fim)
+- Titular do certificado
+- Chave pública
+- Assinatura digital
+
+## Autoassinado vs. Assinado por CA
+Autoassinado: você mesmo assina seu certificado com sua chave privada.
+É útil para testes e ambientes internos, mas navegadores não confiam
+nele, pois não há uma CA reconhecida validando sua identidade.
+
+Assinado por CA: uma entidade terceira confiável valida e assina o
+certificado. Navegadores já vêm com uma lista de CAs confiáveis
+pré-instalada, por isso aceitam esses certificados sem alertas.
