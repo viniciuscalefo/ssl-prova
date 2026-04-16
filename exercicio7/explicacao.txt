@@ -1,0 +1,65 @@
+O que foi feito?
+Foi implementado um servidor HTTPS usando o módulo 'ssl' do Python,
+carregando o certificado e a chave privada gerados nos exercícios anteriores.
+
+Explicação do código 
+
+1. Importação dos módulos
+'import http.server, ssl'
+- http.server 
+- ssl     
+
+2. Criação do servidor HTTP base
+'server = http.server.HTTPServer(('0.0.0.0', 8443), http.server.SimpleHTTPRequestHandler)'
+- HTTPServer               → cria o servidor na porta 8443
+- '0.0.0.0'               → escuta em todas as interfaces de rede
+- 8443                     → porta utilizada (alternativa à 443 padrão)
+- SimpleHTTPRequestHandler → manipulador padrão de requisições HTTP
+
+3. Criação do contexto SSL
+'ctx = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)'
+- SSLContext        → objeto que gerencia as configurações SSL/TLS
+- PROTOCOL_TLS_SERVER → define que este lado é o servidor TLS
+
+4. Carregamento do certificado e chave privada
+'ctx.load_cert_chain('/etc/ssl/certificates/vinicius.crt',
+                     '/etc/ssl/certificates/vinicius.key')'
+- load_cert_chain → associa o certificado e a chave privada ao contexto SSL
+- vinicius.crt    → certificado digital gerado no exercício 5
+- vinicius.key    → chave privada gerada no exercício 3
+
+5. Aplicação do SSL no socket do servidor
+'server.socket = ctx.wrap_socket(server.socket, server_side=True)'
+- wrap_socket    → envolve o socket TCP comum com uma camada SSL/TLS
+- server_side    → confirma que este é o lado servidor da conexão
+Antes desse passo, o servidor era HTTP puro. Após ele, toda comunicação
+passa a ser criptografada.
+
+6. Inicialização do servidor
+'server.serve_forever()'
+- Mantém o servidor rodando continuamente, aguardando conexões.
+
+## O que acontece quando o navegador acessa https://localhost:8443?
+
+1. O navegador inicia um 'handshake' TLS com o servidor
+2. O servidor apresenta o certificado vinicius.crt
+3. O navegador verifica se o certificado é confiável
+4. Como é autoassinado (não emitido por uma CA reconhecida),
+   o navegador exibe um AVISO de segurança
+5. Mesmo com o aviso, é possível prosseguir e a conexão
+   ESTARÁ criptografada — o problema é apenas a confiança,
+   não a criptografia em si
+
+## Por que ainda aparece aviso no navegador?
+O aviso ocorre porque o certificado é autoassinado.
+A criptografia funciona normalmente, mas o navegador não consegue
+verificar a identidade do servidor através de uma CA confiável.
+Em produção, esse problema é resolvido usando certificados emitidos
+por CAs reconhecidas, como o Let's Encrypt (gratuito).
+
+## Conclusão
+Esta implementação demonstra na prática como funciona um servidor
+HTTPS: o certificado é apresentado ao cliente, o handshake TLS
+estabelece uma sessão segura, e toda a comunicação passa a ser
+criptografada. Foi uma implementação mais avançada e completa
+do que o exercício originalmente pedia.
