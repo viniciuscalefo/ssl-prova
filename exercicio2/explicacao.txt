@@ -1,0 +1,4 @@
+## Estrutura de Diretórios SSL
+O diretório /etc/ssl/ é o local padrão no Linux para armazenar
+certificados e chaves SSL. A subpasta /certificates foi criada
+para organizar os certificados gerados nesta atividade.
