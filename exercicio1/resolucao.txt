@@ -1,0 +1,4 @@
+## OpenSSL
+O OpenSSL é uma biblioteca open source que implementa os protocolos SSL e TLS.
+Ele permite criar chaves criptográficas, certificados digitais e testar conexões seguras.
+É amplamente usado em servidores web para criptografar comunicações HTTPS.
