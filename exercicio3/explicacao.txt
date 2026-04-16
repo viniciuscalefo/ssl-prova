@@ -1,0 +1,5 @@
+## Chave Privada RSA
+O comando 'openssl genrsa' gera uma chave privada RSA de 2048 bits.
+A chave privada é um arquivo secreto que nunca deve ser compartilhado.
+Ela é usada para assinar e descriptografar dados. O tamanho de 2048 bits
+garante segurança adequada para uso atual.
