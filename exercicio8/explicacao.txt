@@ -1,0 +1,7 @@
+Para validar um certificado com OpenSSL, foi utilizado o comando "openssl x509 -in aluno.crt -text -noout", que exibe todas as informações do certificado de forma legível, sem mostrar o conteúdo em base64.
+
+Ao analisar o certificado, é importante verificar alguns campos principais, como o emissor, o titular , o período de validade, o algoritmo da chave pública e o algoritmo de assinatura.
+
+Os navegadores não confiam em certificados autoassinados porque trabalham com uma lista de Autoridades Certificadoras (CAs) confiáveis. Quando um certificado não é assinado por uma dessas entidades, o navegador exibe avisos de segurança, indicando que a conexão pode não ser confiável.
+
+Em certificados válidos, existe uma cadeia de confiança composta por uma CA raiz, uma ou mais CAs intermediárias e, por fim, o certificado do site. Essa estrutura garante a autenticidade do certificado. Já os certificados autoassinados não seguem essa cadeia, por isso não são aceitos automaticamente.
